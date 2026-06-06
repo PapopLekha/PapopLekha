@@ -1,51 +1,37 @@
 'use client'
 
 import styles from './Experience.module.scss'
-import { comfortaa, montserrat, roboto_mono } from '../../lib/fonts';
-import { useState, useEffect, useRef } from 'react';
+import { comfortaa, roboto_mono } from '../../lib/fonts';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
 import { experienceEntry } from '../../lib/prisma';
 
-const ExperienceCard = (info: experienceEntry) => {
+const ExperienceCard = ({ index: _index, ...info }: experienceEntry & { index: number }) => {
   const { institution, role, from, to, description, logo } = info;
-  const containerRef = useRef(null);
-  const isInView = useInView(containerRef);
 
   return (
-    <motion.div
-      layout
-      initial={false}
-      ref={containerRef}
-      style={{
-        transform: isInView ? "none" : "translateX(100%)",
-        opacity: isInView ? 1 : 0,
-        transition: "all 1s cubic-bezier(0.17, 0.55, 0.55, 1)",
-      }}
-      className={styles.card}
-    >
-      <motion.div layout className={`${styles.header} ${roboto_mono.className}`}>
+    <div className={styles.card}>
+      <div className={`${styles.header} ${roboto_mono.className}`}>
         <h4>{role} @{institution}</h4>
-        <motion.div layout className={styles.date}>
+        <div className={styles.date}>
           <h4>{from} - {to}</h4>
-        </motion.div>
-      </motion.div>
-      <motion.div layout className={`${styles.info} ${comfortaa.className}`}>
-        <motion.div layout className={styles.description}>
-          <motion.ul layout>
+        </div>
+      </div>
+      <div className={`${styles.info} ${comfortaa.className}`}>
+        <div className={styles.description}>
+          <ul>
             {description.map((d) => (
-              <motion.li key={d}><p>{d}</p></motion.li>
+              <li key={d}><p>{d}</p></li>
             ))}
-          </motion.ul>
-        </motion.div>
+          </ul>
+        </div>
         {logo && (
-          <motion.div layout className={styles.image}>
+          <div className={styles.image}>
             <Image src={logo} alt={institution} fill />
-          </motion.div>
+          </div>
         )}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
@@ -68,25 +54,23 @@ const Experience = () => {
       });
   }, []);
 
+  const sections: { key: keyof Grouped; label: string }[] = [
+    { key: 'WORK', label: 'Work' },
+    { key: 'EDUCATION', label: 'Education' },
+    { key: 'ORGANISATION', label: 'Organisation' },
+  ];
+
   return (
     <main className={styles.main}>
-      {grouped.WORK.length > 0 && (
-        <motion.div layout className={styles.wrapper}>
-          <h2 className={comfortaa.className}>Work</h2>
-          {grouped.WORK.map((e) => <ExperienceCard key={e.id} {...e} />)}
-        </motion.div>
-      )}
-      {grouped.EDUCATION.length > 0 && (
-        <motion.div layout className={styles.wrapper}>
-          <h2 className={comfortaa.className}>Education</h2>
-          {grouped.EDUCATION.map((e) => <ExperienceCard key={e.id} {...e} />)}
-        </motion.div>
-      )}
-      {grouped.ORGANISATION.length > 0 && (
-        <motion.div layout className={styles.wrapper}>
-          <h2 className={comfortaa.className}>Organisation</h2>
-          {grouped.ORGANISATION.map((e) => <ExperienceCard key={e.id} {...e} />)}
-        </motion.div>
+      {sections.map(({ key, label }) =>
+        grouped[key].length > 0 ? (
+          <div key={key} className={styles.wrapper}>
+            <h2 className={comfortaa.className}>{label}</h2>
+            {grouped[key].map((e, i) => (
+              <ExperienceCard key={e.id} {...e} index={i} />
+            ))}
+          </div>
+        ) : null
       )}
     </main>
   );

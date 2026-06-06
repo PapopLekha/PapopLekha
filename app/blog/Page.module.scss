@@ -20,6 +20,15 @@
   @media (max-width: 480px) { font-size: 1.7rem; }
 }
 
+.empty {
+  width: 90%;
+  padding: 4rem 0;
+  text-align: center;
+  opacity: 0.38;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
 .grid {
   width: 90%;
   display: grid;

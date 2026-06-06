@@ -4,19 +4,26 @@ import styles from "./Page.module.scss";
 import { comfortaa } from "../../lib/fonts";
 import { blogWithTags } from "../../lib/prisma";
 import BlogCard from "../../components/layout/BlogCard";
+import CardSkeleton from "../../components/layout/CardSkeleton";
 import Hypertext from "../../components/ui/Hypertext";
 import { motion } from "framer-motion";
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 export default function Blog() {
   const [posts, setPosts] = useState<blogWithTags[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/blog").then((r) => r.json()).then(setPosts);
+    fetch("/api/blog")
+      .then((r) => r.json())
+      .then((data) => {
+        setPosts(data);
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -26,18 +33,23 @@ export default function Blog() {
           <Hypertext text="BLOG" style={{ margin: 0 }} />
         </div>
       </div>
-      <motion.div
-        className={styles.grid}
-        variants={containerVariants}
-        initial="hidden"
-        animate={posts.length > 0 ? "visible" : "hidden"}
-      >
-        {posts.length > 0 ? (
-          posts.map((post) => <BlogCard key={post.id} post={post} />)
-        ) : (
-          <p style={{ fontWeight: "400", opacity: 0.5 }}>Loading...</p>
-        )}
-      </motion.div>
+
+      {loading ? (
+        <div className={styles.grid}>
+          {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
+        </div>
+      ) : posts.length === 0 ? (
+        <p className={styles.empty}>Nothing here at the moment.</p>
+      ) : (
+        <motion.div
+          className={styles.grid}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {posts.map((post) => <BlogCard key={post.id} post={post} />)}
+        </motion.div>
+      )}
     </main>
   );
 }

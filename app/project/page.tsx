@@ -1,29 +1,29 @@
 'use client'
-import React from "react";
 import { useState, useEffect } from "react";
 import styles from './Page.module.scss'
 import { comfortaa } from "../../lib/fonts";
 import { projectWithInfo } from "../../lib/prisma";
 import ProjectCard from "../../components/layout/ProjectCard";
+import CardSkeleton from "../../components/layout/CardSkeleton";
 import Hypertext from "../../components/ui/Hypertext";
 import { motion } from "framer-motion";
 
-async function getAllProjects() {
-  const res = await fetch(`../api/projects`);
-  const data = await res.json();
-  return data;
-}
-
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
-const Project = () => {
+export default function Project() {
   const [projects, setProjects] = useState<projectWithInfo[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllProjects().then((data) => setProjects(data));
+    fetch("../api/projects")
+      .then((r) => r.json())
+      .then((data) => {
+        setProjects(data);
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -33,22 +33,25 @@ const Project = () => {
           <Hypertext text="PROJECTS" style={{ margin: 0 }} />
         </div>
       </div>
-      <motion.div
-        className={styles.grid}
-        variants={containerVariants}
-        initial="hidden"
-        animate={projects.length > 0 ? "visible" : "hidden"}
-      >
-        {projects.length > 0 ? (
-          projects.map((project) => (
+
+      {loading ? (
+        <div className={styles.grid}>
+          {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
+        </div>
+      ) : projects.length === 0 ? (
+        <p className={styles.empty}>Nothing here at the moment.</p>
+      ) : (
+        <motion.div
+          className={styles.grid}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
-          ))
-        ) : (
-          <p style={{ fontWeight: "400", opacity: 0.5 }}>Loading...</p>
-        )}
-      </motion.div>
+          ))}
+        </motion.div>
+      )}
     </main>
   );
-};
-
-export default Project;
+}
