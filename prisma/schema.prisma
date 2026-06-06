@@ -4,8 +4,8 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
+  url       = env("POSTGRES_PRISMA_URL")
 }
 
 model Project {
@@ -39,4 +39,44 @@ model Tag {
   id      Int       @id @default(autoincrement())
   name    String    @unique
   project Project[] @relation("ProjectToTag")
+}
+
+model Blog {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  published Boolean   @default(false)
+  slug      String    @unique
+  title     String
+  date      DateTime  @default(now())
+  excerpt   String    @default("")
+  banner    String?
+  content   String[]
+  tags      BlogTag[]
+}
+
+model BlogTag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  blogs Blog[]
+}
+
+enum ExperienceType {
+  WORK
+  EDUCATION
+  ORGANISATION
+}
+
+model Experience {
+  id          String         @id @default(uuid())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  type        ExperienceType
+  institution String
+  role        String
+  from        String
+  to          String
+  description String[]
+  logo        String?
+  order       Int            @default(0)
 }

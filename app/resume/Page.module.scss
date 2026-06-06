@@ -1,4 +1,4 @@
-.container{
+.container {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -6,25 +6,25 @@
   align-items: center;
   padding: 5% 10%;
   width: 50%;
-  h1{
+
+  h1 {
     margin: 0rem 0;
   }
-  .button{
+
+  .button {
     font-size: 1.5rem;
-    // color: var(--color-background);
-    // background-color: var(--color-text);
     border: 1px solid var(--color-text);
     padding: 0.5em 1em;
     margin: 1em;
     border-radius: 0.5em;
     transition: all ease-in-out 100ms;
-    &:hover{
+    &:hover {
       color: var(--color-text);
       background-color: var(--color-background);
       border: 1px solid var(--color-text);
     }
   }
-  @media screen and (max-width: 768px) and (min-width: 300px){
-    flex-direction: column;
-  }
+
+  @media (max-width: 1024px) { width: 70%; }
+  @media (max-width: 768px)  { width: 90%; flex-direction: column; padding: 8% 5%; }
 }

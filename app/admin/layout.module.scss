@@ -1,0 +1,188 @@
+.shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+// ── Desktop sidebar ───────────────────────────────────────────────────────────
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 210px;
+  background: var(--color-background-secondary);
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 1.25rem 2rem;
+  z-index: 50;
+  overflow-y: auto;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.sidebarLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin: 0 0 0.75rem 0.5rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.navLink {
+  display: block;
+  padding: 0.55rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  opacity: 0.65;
+  text-decoration: none;
+  transition: opacity 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.navLinkActive {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.13);
+  font-weight: 600;
+}
+
+.navSection {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  margin: 1.25rem 0 0.4rem 0.5rem;
+}
+
+.sidebarFooter {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.userRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avatar {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.65;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.signOutBtn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.65rem;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+  width: fit-content;
+
+  &:hover { opacity: 1; }
+}
+
+// ── Mobile top nav ────────────────────────────────────────────────────────────
+.mobileNav {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    overflow-x: auto;
+    padding: 0.6rem 1rem;
+    background: var(--color-background-secondary);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+}
+
+.mobileNavLink {
+  display: block;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  opacity: 0.6;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  flex-shrink: 0;
+
+  &:hover { opacity: 1; }
+}
+
+.mobileNavLinkActive {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+}
+
+.mobileSignOut {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  opacity: 0.6;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+
+  &:hover { opacity: 1; }
+}
+
+// ── Main content ──────────────────────────────────────────────────────────────
+.content {
+  margin-left: 210px;
+  flex: 1;
+  padding: 3rem 3.5rem;
+  min-height: 100vh;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding: 1.5rem 1.25rem;
+  }
+}

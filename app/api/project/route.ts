@@ -14,6 +14,7 @@ export async function GET(request: Request) {
 
   const res = await prisma.project.findUnique({
     where: id ? { id } : { name: name! },
+    include: { tags: true, technologies: true },
   })
   if (!res) {
     return new NextResponse('Not Found', { status: 400 });

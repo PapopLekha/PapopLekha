@@ -1,5 +1,6 @@
 import React from "react";
-import ContactIcons from "../container/contactIcons";
+import ContactIcons from "../components/sections/ContactIcons";
+import Providers from "../components/Providers";
 import "../styles/globals.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -54,16 +55,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.className}`}>
       <body>
-        <div style={{"margin":"0.5em","fontSize":"2em","position":"fixed","width":"50px","height":"50px","cursor":"pointer"}}>
-          <Link href={"/"} passHref>
-            <Logo style={{color:"var(--color-text)"}}/>
-          </Link>
-        </div>
-        {children}
-        <ContactIcons />
-        <footer>
-          <p>©{new Date().getFullYear()} </p>
-        </footer>
+        <Providers>
+          <div style={{"margin":"0.5em","fontSize":"2em","position":"fixed","width":"50px","height":"50px","cursor":"pointer"}}>
+            <Link href={"/"} passHref>
+              <Logo style={{color:"var(--color-text)"}}/>
+            </Link>
+          </div>
+          {children}
+          <ContactIcons />
+          <footer>
+            <p>©{new Date().getFullYear()} </p>
+          </footer>
+        </Providers>
       </body>
     </html>
   );

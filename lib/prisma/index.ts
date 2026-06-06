@@ -19,12 +19,14 @@ if (process.env.NODE_ENV === "production") {
 export type projectWithInfo = Prisma.ProjectGetPayload<{
   include: {
     tags: true;
-    technologies: {
-      select: {
-        name: true;
-      }
-    };
+    technologies: { select: { name: true } };
   };
 }>;
+
+export type blogWithTags = Prisma.BlogGetPayload<{
+  include: { tags: true };
+}>;
+
+export type experienceEntry = Prisma.ExperienceGetPayload<{}>;
 
 export { prisma };

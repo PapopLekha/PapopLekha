@@ -1,0 +1,169 @@
+.embla {
+  --slide-spacing: 0rem;
+  --slide-size: 100%;
+  height: 100%;
+  width: 100%;
+
+  .viewport {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+
+    .container {
+      backface-visibility: hidden;
+      display: flex;
+      touch-action: pan-y;
+      flex-direction: row;
+      height: 100%;
+      width: 100%;
+      margin-left: calc(var(--slide-spacing) * -1);
+    }
+  }
+
+  .progress {
+    z-index: 1;
+    background-color: var(--color-background);
+    position: absolute;
+    height: 0.3rem;
+    border-radius: 0.2rem;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    pointer-events: none;
+    width: 25%;
+    max-width: 90%;
+    overflow: hidden;
+
+    .progress__bar {
+      background-image: linear-gradient(
+        45deg,
+        var(--color-background-secondary),
+        var(--color-background-tritary)
+      );
+      position: absolute;
+      width: 100%;
+      top: 0;
+      bottom: 0;
+      left: -100%;
+    }
+  }
+}
+
+.dots {
+  z-index: 1;
+  bottom: 0rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot, .dot_selected,
+.button {
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.dot, .dot_selected {
+  width: 1rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  margin-right: 0.75rem;
+  margin-left: 0.75rem;
+
+  @media (max-width: 768px) {
+    height: 2rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  &::after {
+    background: var(--color-background);
+    transform: rotate(45deg);
+    border-radius: 0.2rem;
+    aspect-ratio: 1/1;
+    border: solid 0.15rem var(--color-text);
+    height: 0.5rem;
+    content: "";
+  }
+}
+
+.dot_selected::after {
+  background: linear-gradient(
+    45deg,
+    var(--color-background-secondary),
+    var(--color-background-tritary)
+  );
+}
+
+.button {
+  z-index: 1;
+  color: var(--color-background);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 4rem;
+  height: 4rem;
+
+  @media (max-width: 768px) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &:disabled {
+    opacity: 0;
+  }
+}
+
+.buttonPrev {
+  left: 0rem;
+}
+
+.buttonNext {
+  right: 0rem;
+}
+
+.buttonSVG {
+  width: 65%;
+  height: 65%;
+}
+
+.line__wrapper {
+  padding: 0.3rem;
+  margin: 0.3rem;
+
+  .line, .line__selected {
+    background-color: rgb(199, 199, 199);
+    width: 2rem;
+    height: 0.2rem;
+    transition: all 0.1s ease-in-out;
+    border-radius: 5px;
+
+    &__selected {
+      width: 3.5rem;
+      background-color: black;
+    }
+  }
+
+  &:hover {
+    .line {
+      width: 3rem;
+      background-color: rgb(99, 99, 99);
+    }
+  }
+}

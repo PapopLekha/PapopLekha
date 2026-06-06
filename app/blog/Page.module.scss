@@ -1,0 +1,32 @@
+.header {
+  width: 100%;
+  height: 25vh;
+  padding: 5% 10%;
+  display: flex;
+  align-items: flex-end;
+
+  @media (max-width: 768px) {
+    height: 18vh;
+    padding: 5% 5%;
+  }
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  height: 1.1em;
+
+  @media (max-width: 768px) { font-size: 2.2rem; }
+  @media (max-width: 480px) { font-size: 1.7rem; }
+}
+
+.grid {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-bottom: 5rem;
+
+  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 600px)  { grid-template-columns: 1fr; width: 95%; }
+}

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "prisma": "dotenv -e .env.development.local prisma"
@@ -29,6 +29,7 @@
     "eslint-config-next": "^16.2.6",
     "framer-motion": "^12.0.0",
     "next": "^16.2.6",
+    "next-auth": "^4.24.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.4.3",
@@ -37,10 +38,14 @@
     "sharp": "^0.31.3",
     "typescript": "^6.0.3"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@types/styled-components": "^5.1.26",
     "dotenv-cli": "^7.0.0",
-    "prisma": "^6.19.3"
+    "prisma": "^6.19.3",
+    "tsx": "^4.22.4"
   }
 }
