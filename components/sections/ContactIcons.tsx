@@ -12,8 +12,10 @@ import styles from "./ContactIcons.module.scss";
 import { faM } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 const ContactIcons = () => {
   const [theme, setTheme] = useState('light');
+  const pathname = usePathname();
   // const themeToggle = () => {
   //   if(theme === 'light'){
   //     document.documentElement.setAttribute('data-theme','dark');
@@ -38,6 +40,9 @@ const ContactIcons = () => {
       setTheme('light');
     }
   })
+
+  if (pathname === '/login' || pathname?.startsWith('/admin')) return null;
+
   return (
     <div className={styles.container}>
       {/* <div onClick={() => themeToggle()} style={{ cursor: "pointer" }}> */}

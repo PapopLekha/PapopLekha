@@ -3,6 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import Logo from "../../public/logo.svg";
 import styles from "./layout.module.scss";
 
 const navItems = [
@@ -23,8 +26,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className={styles.shell}>
       {/* Desktop sidebar */}
       <aside className={styles.sidebar}>
-        <p className={styles.sidebarLabel}>Admin</p>
+        <Link href="/" className={styles.logoLink}>
+          <Logo className={styles.sidebarLogo} />
+        </Link>
+
         <nav className={styles.nav}>
+          <Link href="/" className={styles.homeLink}>
+            <FontAwesomeIcon icon={faHome} className={styles.homeIcon} />
+            Home
+          </Link>
+          <div className={styles.navDivider} />
           {navItems.map(({ href, label }) => (
             <Link
               key={href}
@@ -60,6 +71,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Mobile top nav */}
       <nav className={styles.mobileNav}>
+        <Link href="/" className={styles.mobileHomeLink}>
+          <FontAwesomeIcon icon={faHome} />
+        </Link>
         {navItems.map(({ href, label }) => (
           <Link
             key={href}

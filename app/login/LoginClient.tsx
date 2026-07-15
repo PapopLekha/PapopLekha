@@ -1,6 +1,8 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Logo from "../../public/logo.svg";
 import s from "./login.module.scss";
 
 function GitHubIcon() {
@@ -18,8 +20,13 @@ export default function LoginClient() {
   return (
     <div className={s.page}>
       <div className={s.card}>
-        <h1 className={s.title}>Admin</h1>
-        <p className={s.sub}>Sign in to manage your portfolio</p>
+        <div className={s.logoWrap}>
+          <Logo className={s.logo} />
+        </div>
+        <div className={s.header}>
+          <h1 className={s.title}>Admin</h1>
+          <p className={s.sub}>Sign in to manage your portfolio</p>
+        </div>
         {error && (
           <p className={s.error}>Access denied — only the site owner can log in.</p>
         )}
@@ -30,6 +37,7 @@ export default function LoginClient() {
           <GitHubIcon />
           Continue with GitHub
         </button>
+        <Link href="/" className={s.homeLink}>← Back to site</Link>
       </div>
     </div>
   );
