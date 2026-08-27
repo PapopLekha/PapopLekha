@@ -3,6 +3,7 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import s from "../../admin.module.scss";
+import ImageUploadField from "../../ImageUploadField";
 
 type Form = {
   type: string;
@@ -131,10 +132,7 @@ export default function ExperienceForm({ params }: { params: Promise<{ id: strin
           <p className={s.hint}>Each line becomes a bullet point.</p>
         </div>
 
-        <div className={s.field}>
-          <label>Logo path</label>
-          <input className={s.input} value={form.logo} onChange={set("logo")} placeholder="/experience/company.png" />
-        </div>
+        <ImageUploadField label="Logo" value={form.logo} onChange={(url) => setForm((prev) => ({ ...prev, logo: url }))} />
 
         {error && <p style={{ color: "var(--color-red)", margin: 0 }}>{error}</p>}
 

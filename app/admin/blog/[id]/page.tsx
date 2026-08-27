@@ -3,6 +3,7 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import s from "../../admin.module.scss";
+import ImageUploadField from "../../ImageUploadField";
 
 type Form = {
   slug: string;
@@ -102,10 +103,7 @@ export default function BlogForm({ params }: { params: Promise<{ id: string }> }
             <label>Date *</label>
             <input className={s.input} type="date" required value={form.date} onChange={set("date")} />
           </div>
-          <div className={s.field}>
-            <label>Banner image path</label>
-            <input className={s.input} value={form.banner} onChange={set("banner")} placeholder="/blog/banner.jpg" />
-          </div>
+          <ImageUploadField label="Banner image" value={form.banner} onChange={(url) => setForm((prev) => ({ ...prev, banner: url }))} />
         </div>
 
         <div className={s.field}>

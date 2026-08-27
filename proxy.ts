@@ -7,5 +7,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ["/admin", "/admin/(.*)"],
+  matcher: ["/admin", "/admin/(.*)", "/api/admin/(.*)"],
 };
