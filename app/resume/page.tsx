@@ -10,7 +10,7 @@ const Resume = () => {
       <h1>Resume</h1>
       <p>latest update: 01.04.2025</p>
       <div className={styles.container}>
-        <Link className={styles.button} href="https://raw.githubusercontent.com/Retaehc-pop/RESUME/master/resume.pdf" download passHref>
+        <Link className={styles.button} href="https://raw.githubusercontent.com/PapopLekha/RESUME/master/resume.pdf" download passHref>
           <FontAwesomeIcon icon={faDownload} /> English
         </Link>
 

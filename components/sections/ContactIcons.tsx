@@ -49,7 +49,7 @@ const ContactIcons = () => {
       {/*   <FontAwesomeIcon icon={theme === "light" ? faSun : faMoon} className={styles.icon} /> */}
       {/*   <span><Hypertext text="THEME" /></span> */}
       {/* </div> */}
-      <Link href="https://github.com/Retaehc-pop" passHref>
+      <Link href="https://github.com/PapopLekha" passHref>
         <div>
           <FontAwesomeIcon icon={faGithub} className={styles.icon} />
           <span><Hypertext text="GITHUB" /></span>

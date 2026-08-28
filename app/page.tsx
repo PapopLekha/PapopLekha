@@ -131,7 +131,7 @@ const Page = () => {
       <div className={styles.side_by_side} >
         <section className={styles.menulist} >
           <div className={styles.container}>
-            <Link className={styles.menu} ref={resumeRef} style={{ transform: resumeIsInView ? "none" : "translateX(-100%)", opacity: resumeIsInView ? 1 : 0 }} href="https://raw.githubusercontent.com/Retaehc-pop/RESUME/master/resume.pdf" passHref>
+            <Link className={styles.menu} ref={resumeRef} style={{ transform: resumeIsInView ? "none" : "translateX(-100%)", opacity: resumeIsInView ? 1 : 0 }} href="https://raw.githubusercontent.com/PapopLekha/RESUME/master/resume.pdf" passHref>
               <Hypertext text={"RESUME"} />
               <FontAwesomeIcon className={styles.arrow} icon={faArrowRight} />
             </Link>

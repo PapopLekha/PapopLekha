@@ -10,7 +10,7 @@
   </a>
 </div>
 <div>
-<p align="center"><img src="https://komarev.com/ghpvc/?username=Retaehc-pop&style=flat-square&color=blue" alt=""/></p>
+<p align="center"><img src="https://komarev.com/ghpvc/?username=PapopLekha&style=flat-square&color=blue" alt=""/></p>
   <strong>🎓 B.sc Computer Science <a href="https://www.rwth-aachen.de/">@RWTH Aachen University</a></strong>
   <br/>
   <strong>💼 HPC System Engineer <a href="https://gns-systems.de/">@GNS-Systems</a></strong>
